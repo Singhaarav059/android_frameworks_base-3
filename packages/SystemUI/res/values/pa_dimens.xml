@@ -83,4 +83,7 @@
     <dimen name="net_traffic_txt_img_padding">1dp</dimen>
     <dimen name="net_traffic_sb_txt_img_padding">2dp</dimen>
 
+    <!-- QS tile title -->
+    <dimen name="qs_tile_height_wo_label">48dp</dimen>
+
 </resources>
