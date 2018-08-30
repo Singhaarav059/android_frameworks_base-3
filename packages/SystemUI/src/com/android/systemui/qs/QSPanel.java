@@ -685,4 +685,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
             }
         }
     }
+
+    public int getNumColumns() {
+        return mTileLayout.getNumColumns();
+    }
 }
