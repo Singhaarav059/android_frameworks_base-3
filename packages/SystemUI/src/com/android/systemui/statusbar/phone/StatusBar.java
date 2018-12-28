@@ -4763,6 +4763,18 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.LOCKSCREEN_DATE_SELECTION),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_COLUMNS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_LAYOUT_COLUMNS_LANDSCAPE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_QUICKBAR_COLUMNS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_TILE_TITLE_VISIBILITY),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4785,6 +4797,15 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         public void update() {
         updateKeyguardStatusSettings();
+            setQsColumns();
+        }
+    }
+
+    private void setQsColumns() {
+        if (mQSPanel != null) {
+            mQSPanel.updateResources();
+            mQSPanel.updateSettings();
+            mQuickQSPanel.updateSettings();
         }
     }
 
