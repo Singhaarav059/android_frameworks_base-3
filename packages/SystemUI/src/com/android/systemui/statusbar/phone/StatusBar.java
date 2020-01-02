@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2010 The Android Open Source Project
  *
@@ -1817,6 +1818,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     public NotificationPresenter getPresenter() {
         return mPresenter;
     }
+
 
     /**
      * All changes to the status bar and notifications funnel through here and are batched.
@@ -4731,6 +4733,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_PANEL_BG_USE_NEW_TINT),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.LOCKSCREEN_CLOCK_SELECTION),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4745,10 +4750,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mQSPanel.getHost().reloadAllTiles();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT))) {
                 mQSPanel.getHost().reloadAllTiles();
+            } else if (uri.equals(Settings.Secure.getUriFor(Settings.Secure.LOCKSCREEN_CLOCK_SELECTION))) {
+                updateKeyguardStatusSettings();
             }
         }
 
         public void update() {
+        updateKeyguardStatusSettings();
         }
     }
 
@@ -4797,6 +4805,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
     }
+
+    private void updateKeyguardStatusSettings() {
+        mNotificationPanel.updateKeyguardStatusSettings();
+    }
+
 
     @Subcomponent
     public interface StatusBarInjector {
