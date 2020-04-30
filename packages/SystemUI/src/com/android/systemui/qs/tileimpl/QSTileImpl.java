@@ -449,7 +449,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
                     else if (setQsUseNewTint == 2)
                    return Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
                 else
-                   return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary)
+                   return Utils.getColorAttrDefaultColor(context, android.R.attr.colorPrimary);
             default:
                 Log.e("QSTile", "Invalid state " + state);
                 return 0;
