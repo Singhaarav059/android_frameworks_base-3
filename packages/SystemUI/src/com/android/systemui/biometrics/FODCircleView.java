@@ -412,6 +412,7 @@ public class FODCircleView extends ImageView {
         mIsCircleShowing = false;
 
         setImageResource(R.drawable.fod_icon_op);
+        this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         updateIconDim();
         invalidate();
 
