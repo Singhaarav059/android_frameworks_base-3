@@ -7433,5 +7433,9 @@ message MetricsEvent {
     // BEGIN PA CONSTANTS
     // Settings -> Backup & Reset -> Feature Preferences
     FEATURE_PREFERENCES = 9001;
+
+    // CustomSettings constant
+    CUSTOM_SETTINGS = 1999;
+
   }
 }
