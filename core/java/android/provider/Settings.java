@@ -4763,6 +4763,20 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * 0 - Default
+         * 1 - Round with ring
+         * 2 - Two-toned round with ring
+         * 3 - Squircle with ring
+         * @hide
+         */
+        public static final String QS_TILE_STYLE = "qs_tile_style";
+
+        /** @hide */
+        private static final Validator QS_TILE_STYLE_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+
+        /**
          * Controls whether gestures are enabled.
          * @hide
          */
@@ -5082,6 +5096,7 @@ public final class Settings {
             QS_QUICKBAR_COLUMNS,
             QS_LAYOUT_ROWS_LANDSCAPE,
             QS_LAYOUT_ROWS,
+            QS_TILE_STYLE,
         };
 
         /**
@@ -5246,6 +5261,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_QUICKBAR_COLUMNS);
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
+            PRIVATE_SETTINGS.add(QS_TILE_STYLE);
         }
 
         /**
@@ -5371,6 +5387,7 @@ public final class Settings {
             VALIDATORS.put(QS_LAYOUT_ROWS_LANDSCAPE,
                     QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
+            VALIDATORS.put(QS_TILE_STYLE, QS_TILE_STYLE_VALIDATOR);
         }
 
         /**
