@@ -4775,6 +4775,15 @@ public final class Settings {
         private static final Validator QS_TILE_STYLE_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
 
+        /**
+         * Whether to use new QS panel bg tint or not
+         * @hide
+         */
+        public static final String QS_PANEL_BG_USE_NEW_TINT = "qs_panel_bg_use_new_tint";
+
+        /** @hide */
+        private static final Validator QS_PANEL_BG_USE_NEW_TINT_VALIDATOR = BOOLEAN_VALIDATOR;
+
 
         /**
          * Controls whether gestures are enabled.
@@ -5097,6 +5106,7 @@ public final class Settings {
             QS_LAYOUT_ROWS_LANDSCAPE,
             QS_LAYOUT_ROWS,
             QS_TILE_STYLE,
+            QS_PANEL_BG_USE_NEW_TINT,
         };
 
         /**
@@ -5388,6 +5398,7 @@ public final class Settings {
                     QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
             VALIDATORS.put(QS_TILE_STYLE, QS_TILE_STYLE_VALIDATOR);
+            VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
         }
 
         /**
