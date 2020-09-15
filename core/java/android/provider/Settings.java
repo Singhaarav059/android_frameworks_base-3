@@ -4983,6 +4983,16 @@ public final class Settings {
         /** @hide */
         private static final Validator NAVIGATION_HANDLE_WIDTH_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
+       /**
+         * Display style of the status bar battery information
+         * 0: Display the battery an icon in portrait mode
+         * 1: Display the battery as a circle
+         * 2: Do not display the battery
+         * default: 0
+         * @hide
+         */
+        public static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
+
         /**
          * Height of the back gesture listener
          * 0 means full height
@@ -5028,6 +5038,16 @@ public final class Settings {
         /** @hide */
         private static final Validator QS_QUICKBAR_COLUMNS_VALIDATOR =
                 ANY_INTEGER_VALIDATOR;
+
+        /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         *
+         * @hide
+         */
+        public static final String AUTHENTICATION_SUCCESS_VIB = "authentication_success_vib";
+        /** @hide */
+        private static final Validator AUTHENTICATION_SUCCESS_VIB_VALIDATOR =
+                BOOLEAN_VALIDATOR;
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
@@ -5107,6 +5127,7 @@ public final class Settings {
             QS_LAYOUT_ROWS,
             QS_TILE_STYLE,
             QS_PANEL_BG_USE_NEW_TINT,
+            AUTHENTICATION_SUCCESS_VIB,
         };
 
         /**
@@ -5272,6 +5293,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);
+            PRIVATE_SETTINGS.add(AUTHENTICATION_SUCCESS_VIB);
         }
 
         /**
@@ -5399,6 +5421,7 @@ public final class Settings {
             VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
             VALIDATORS.put(QS_TILE_STYLE, QS_TILE_STYLE_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_USE_NEW_TINT, QS_PANEL_BG_USE_NEW_TINT_VALIDATOR);
+            VALIDATORS.put(AUTHENTICATION_SUCCESS_VIB, AUTHENTICATION_SUCCESS_VIB_VALIDATOR);
         }
 
         /**
