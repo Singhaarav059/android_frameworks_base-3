@@ -60,7 +60,7 @@ public class FODAnimation extends ImageView {
         mAnimParams.y = mPositionY - (mAnimationSize / 2);
 
         setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        setBackgroundResource(R.drawable.fod_op_energy_recognizing_anim);
+        setBackgroundResource(R.drawable.fod_pulse_recognizing_white_anim);
         setVisibility(View.GONE);
         recognizingAnim = (AnimationDrawable) getBackground();
 

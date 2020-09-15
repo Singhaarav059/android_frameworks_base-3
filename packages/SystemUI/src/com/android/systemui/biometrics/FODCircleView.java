@@ -412,7 +412,7 @@ public class FODCircleView extends ImageView {
     public void hideCircle() {
         mIsCircleShowing = false;
 
-        setImageResource(R.drawable.fod_icon_op);
+        setImageResource(R.drawable.fod_icon_default);
         updateIconDim();
         invalidate();
 
