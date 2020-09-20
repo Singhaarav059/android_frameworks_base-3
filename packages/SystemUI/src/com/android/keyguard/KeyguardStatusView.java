@@ -343,10 +343,10 @@ public class KeyguardStatusView extends GridLayout implements
             mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
         if (lockDateFont == 1) {
-            mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+            mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
         }
         if (lockDateFont == 2) {
-            mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+            mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD));
         }
         if (lockDateFont == 3) {
             mKeyguardSlice.setViewsTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));

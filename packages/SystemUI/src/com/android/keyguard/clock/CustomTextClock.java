@@ -221,10 +221,10 @@ public class CustomTextClock extends TextView implements ColorExtractor.OnColors
             setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
         if (lockClockFont == 1) {
-            setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+            setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
         }
         if (lockClockFont == 2) {
-            setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+            setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
         }
         if (lockClockFont == 3) {
             setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));

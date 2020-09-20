@@ -465,12 +465,12 @@ public class KeyguardClockSwitch extends RelativeLayout {
             mClockViewBold.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
         if (lockClockFont == 1) {
-            mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
-            mClockViewBold.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
-        }
-        if (lockClockFont == 2) {
             mClockView.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
             mClockViewBold.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (lockClockFont == 2) {
+            mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+            mClockViewBold.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
         }
         if (lockClockFont == 3) {
             mClockView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
