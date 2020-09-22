@@ -146,11 +146,7 @@ public class FODCircleView extends ImageView {
 
         @Override
         public void onKeyguardVisibilityChanged(boolean showing) {
-            mIsKeyguard = showing;
-
-            if (mFODAnimation != null) {
-                mFODAnimation.setAnimationKeyguard(mIsKeyguard);
-            } else if (!showing) {
+            if (!showing) {
                 hide();
             }
             if (mFODAnimation != null) {
@@ -198,14 +194,6 @@ public class FODCircleView extends ImageView {
             }
         }
 
-        @Override
-        public void onBiometricHelp(int msgId, String helpString,
-                BiometricSourceType biometricSourceType) {
-            if (msgId == -1) { // Auth error
-                hideCircle();
-                mHandler.post(() -> mFODAnimation.hideFODanimation());
-            }
-        }
 
         @Override
         public void onBiometricError(int msgId, String helpString,
