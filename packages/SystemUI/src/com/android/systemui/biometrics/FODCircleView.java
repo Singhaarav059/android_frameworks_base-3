@@ -153,6 +153,9 @@ public class FODCircleView extends ImageView {
             } else if (!showing) {
                 hide();
             }
+            if (mFODAnimation != null) {
+                mFODAnimation.setAnimationKeyguard(showing);
+            }
         }
 
         @Override
@@ -228,6 +231,15 @@ public class FODCircleView extends ImageView {
         public void onStrongAuthStateChanged(int userId) {
             mCanUnlockWithFp = canUnlockWithFp();
             setAlpha(getFodAlpha());
+        }
+
+        @Override
+        public void onBiometricHelp(int msgId, String helpString,
+                BiometricSourceType biometricSourceType) {
+            if (msgId == -1) { // Auth error
+                hideCircle();
+                mHandler.post(() -> mFODAnimation.hideFODanimation());
+            }
         }
     };
 
