@@ -124,6 +124,8 @@ public class FODCircleView extends ImageView {
     private LockPatternUtils mLockPatternUtils;
     private FODAnimation mFODAnimation;
 
+    private boolean mIsRecognizingAnimEnabled;
+
     private Timer mBurnInProtectionTimer;
 
     private KeyguardUpdateMonitor mUpdateMonitor;
@@ -374,7 +376,9 @@ public class FODCircleView extends ImageView {
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside && mIsShowing
                 && mCanUnlockWithFp && !mFading) {
             showCircle();
-            mFODAnimation.showFODanimation();
+            if (mIsRecognizingAnimEnabled) {
+            	mFODAnimation.showFODanimation();
+            }
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP  && mCanUnlockWithFp) {
             hideCircle();
@@ -478,6 +482,9 @@ public class FODCircleView extends ImageView {
 
     private void setFODIcon() {
         int fodicon = getFODIcon();
+
+        mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_RECOGNIZING_ANIMATION, 0) != 0;
 
         if (fodicon == 0) {
             this.setImageResource(R.drawable.fod_icon_default);
@@ -620,6 +627,7 @@ public class FODCircleView extends ImageView {
         if (mIsDreaming) {
             mParams.x += mDreamingOffsetX;
             mParams.y += mDreamingOffsetY;
+            mFODAnimation.updateParams(mParams.y);
         }
 
         mWindowManager.updateViewLayout(this, mParams);
@@ -721,4 +729,72 @@ public class FODCircleView extends ImageView {
             updateIconDim();
         }
     }
+
+class FODAnimation extends ImageView {
+
+    private Context mContext;
+    private int mAnimationPositionY;
+    private LayoutInflater mInflater;
+    private WindowManager mWindowManager;
+    private boolean mShowing = false;
+    private boolean mIsKeyguard;
+    private final AnimationDrawable recognizingAnim;
+    private final WindowManager.LayoutParams mAnimParams = new WindowManager.LayoutParams();
+
+    public FODAnimation(Context context, int mPositionX, int mPositionY) {
+        super(context);
+
+        mContext = context;
+        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mWindowManager = mContext.getSystemService(WindowManager.class);
+
+        mAnimParams.height = mContext.getResources().getDimensionPixelSize(R.dimen.fod_animation_size);
+        mAnimParams.width = mContext.getResources().getDimensionPixelSize(R.dimen.fod_animation_size);
+
+        mAnimationPositionY = (int) Math.round(mPositionY - (mContext.getResources().getDimensionPixelSize(R.dimen.fod_animation_size) / 2));
+
+        mAnimParams.format = PixelFormat.TRANSLUCENT;
+        mAnimParams.type = WindowManager.LayoutParams.TYPE_VOLUME_OVERLAY; // it must be behind FOD icon
+        mAnimParams.flags =  WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
+        mAnimParams.gravity = Gravity.TOP | Gravity.CENTER;
+        mAnimParams.y = mAnimationPositionY;
+
+        this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        this.setBackgroundResource(R.drawable.fod_pulse_recognizing_white_anim);
+        recognizingAnim = (AnimationDrawable) this.getBackground();
+
+    }
+
+    public void updateParams(int mDreamingOffsetY) {
+        mAnimationPositionY = (int) Math.round(mDreamingOffsetY - (mContext.getResources().getDimensionPixelSize(R.dimen.fod_animation_size) / 2));
+        mAnimParams.y = mAnimationPositionY;
+    }
+
+    public void setAnimationKeyguard(boolean state) {
+        mIsKeyguard = state;
+    }
+
+    public void showFODanimation() {
+        if (mAnimParams != null && !mShowing && mIsKeyguard) {
+            mShowing = true;
+            mWindowManager.addView(this, mAnimParams);
+            recognizingAnim.start();
+        }
+    }
+
+    public void hideFODanimation() {
+        if (mShowing) {
+            mShowing = false;
+            if (recognizingAnim != null) {
+                this.clearAnimation();
+                recognizingAnim.stop();
+                recognizingAnim.selectDrawable(0);
+            }
+            if (this.getWindowToken() != null) {
+                mWindowManager.removeView(this);
+            }
+        }
+    }
+
 }
