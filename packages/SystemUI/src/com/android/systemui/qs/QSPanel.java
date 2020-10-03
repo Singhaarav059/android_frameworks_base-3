@@ -113,7 +113,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
 
         mQsTileRevealController = new QSTileRevealController(mContext, this,
                 (PagedTileLayout) mTileLayout);
-        updateSettings();
 
         addDivider();
 
@@ -644,23 +643,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback,
         int getOffsetTop(TileRecord tile);
 
         boolean updateResources();
-        void updateSettings();
-        int getNumColumns();
 
         void setListening(boolean listening);
 
         default void setExpansion(float expansion) {}
 
         int getNumVisibleTiles();
-    }
-
-    public void updateSettings() {
-        if (mTileLayout != null) {
-            mTileLayout.updateSettings();
-        }
-    }
-
-    public int getNumColumns() {
-        return mTileLayout.getNumColumns();
     }
 }
